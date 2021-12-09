@@ -19,12 +19,6 @@ export class PastebinHomePage extends BasicPage {
         this.pasteTitleXpath = '//*[@id="postform-name"]';
         this.buttonCreateNewPasteXpath =
             '//*[@class="btn -big" and @type="submit"]';
-        this.dataTextareaForTaskTwo =
-            'git config --global user.name  "New Sheriff in Town"' +
-            '\n' +
-            'git reset $(git commit-tree HEAD^{tree} -m "Legacy code")' +
-            '\n' +
-            'git push origin master --force';
     }
 
     async addNewPaste(data) {
@@ -52,28 +46,19 @@ export class PastebinHomePage extends BasicPage {
         }
 
         let selectList = await browser.$(selectListXpath);
+        let setContext = this;
 
         async function setSearchWordAndSelectOption(locatorXpath, optionText) {
             let itemLocator = await locatorXpath.replace('RAW', optionText);
-
             let selectItem = await selectList.$(itemLocator);
+            await setContext.waitUntilElementToBeClickable(selectItem);
             await selectItem.click();
         }
 
         async function selectOption() {
-            await setSearchWordAndSelectOption(
-                locatorXpath,
-                optionText,
-                browser
-            );
+            await setSearchWordAndSelectOption(locatorXpath, optionText);
         }
         selectOption();
-    }
-
-    async getSelectBefore(selectXpath) {
-        this.syntaxBefore = await this.driver
-            .wait(until.elementLocated(By.xpath(selectXpath)), 20000)
-            .getText();
     }
 
     async addPasteName(titleContent) {
@@ -85,12 +70,7 @@ export class PastebinHomePage extends BasicPage {
     async sendPaste() {
         let form = await browser.$(this.formXpath);
         let buttonCreateNewPaste = await form.$(this.buttonCreateNewPasteXpath);
-
-        await browser.waitUntil(elementToBeClickable(buttonCreateNewPaste), {
-            timeout: 10000,
-            timeoutMsg: 'Failed, after waiting for the element to be clickable',
-        });
-
+        await this.waitUntilElementToBeClickable(buttonCreateNewPaste);
         await buttonCreateNewPaste.click();
     }
 }

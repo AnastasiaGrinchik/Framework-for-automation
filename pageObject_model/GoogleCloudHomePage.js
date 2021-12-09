@@ -17,25 +17,14 @@ export class GoogleCloudHomePage extends BasicPage {
 
     async openCalculator() {
         let searchButton = await browser.$(this.searchButtonXpath);
-
-        await browser.waitUntil(elementToBeClickable(searchButton), {
-            timeout: 10000,
-            timeoutMsg: 'Failed, after waiting for the element to be clickable',
-        });
-
+        await this.waitUntilElementToBeClickable(searchButton);
         await searchButton.click();
         await searchButton.setValue('Google Cloud Platform Pricing Calculator');
         await browser.keys('Enter');
 
         try {
             let linkCalculator = await browser.$(this.linkCalculatorXpath);
-
-            await browser.waitUntil(elementToBeClickable(linkCalculator), {
-                timeout: 10000,
-                timeoutMsg:
-                    'Failed, after waiting for the element to be clickable',
-            });
-
+            await this.waitUntilElementToBeClickable(linkCalculator);
             await linkCalculator.click();
         } catch (error) {
             if (
@@ -47,24 +36,14 @@ export class GoogleCloudHomePage extends BasicPage {
                     this.linkTwoForPricingXpath
                 );
 
-                await browser.waitUntil(elementToBeClickable(linkCalculator), {
-                    timeout: 10000,
-                    timeoutMsg:
-                        'Failed, after waiting for the element to be clickable',
-                });
-
+                await this.waitUntilElementToBeClickable(linkCalculator);
                 await linkCalculator.click();
 
                 linkCalculator = await browser.$(
                     this.linkTwoForCalculatorXpath
                 );
 
-                await browser.waitUntil(elementToBeClickable(linkCalculator), {
-                    timeout: 10000,
-                    timeoutMsg:
-                        'Failed, after waiting for the element to be clickable',
-                });
-
+                await this.waitUntilElementToBeClickable(linkCalculator);
                 await linkCalculator.click();
             } else {
                 throw error;

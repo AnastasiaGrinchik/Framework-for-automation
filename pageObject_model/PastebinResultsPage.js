@@ -10,11 +10,11 @@ export class PastebinResultsPage extends PastebinHomePage {
         this.savedSyntaxXpath = '//a[@class="btn -small h_800"]';
     }
 
-    async getTitleBrowsertab() {
+    async findOutTitleBrowsertab() {
         await browser.waitUntil(
             titleContains('how to gain dominance among developers'),
             {
-                timeout: 10000,
+                timeout: 20000,
                 timeoutMsg:
                     'Failed, after waiting the element does not contain the same title',
             }
@@ -22,11 +22,10 @@ export class PastebinResultsPage extends PastebinHomePage {
         this.titleBrowserTab = await browser.getTitle();
     }
 
-    async getSavedText(object, key, fieldXpath) {
+    async pushSavedText(object, key, fieldXpath) {
         let field = await browser.$(fieldXpath);
         field = await field.getText();
         object[key] = await field;
-        await console.log(object[key]);
     }
 
     async transformText(obj, key, text) {

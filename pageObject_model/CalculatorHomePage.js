@@ -58,12 +58,7 @@ export class CalculatorHomePage extends GoogleCloudHomePage {
 
     async selectSection() {
         let checkedMode = await browser.$(this.checkedModeXpath);
-
-        await browser.waitUntil(elementToBeClickable(checkedMode), {
-            timeout: 10000,
-            timeoutMsg: 'Failed, after waiting for the element to be clickable',
-        });
-
+        await this.waitUntilElementToBeClickable(checkedMode);
         await checkedMode.click();
     }
 
@@ -81,35 +76,19 @@ export class CalculatorHomePage extends GoogleCloudHomePage {
         let formComputeEngine = await browser.$(this.formComputeEngineXpath);
 
         let select = await formComputeEngine.$(selectXpath);
-
-        await browser.waitUntil(elementToBeClickable(select), {
-            timeout: 10000,
-            timeoutMsg: 'Failed, after waiting for the element to be clickable',
-        });
-
+        await this.waitUntilElementToBeClickable(select);
         await select.click();
 
         let selectList = await formComputeEngine.$(selectListXpath);
-
         let selectItem = await selectList.$(selectItemXpath);
-
-        await browser.waitUntil(elementToBeClickable(selectItem), {
-            timeout: 10000,
-            timeoutMsg: 'Failed, after waiting for the element to be clickable',
-        });
-
+        await this.waitUntilElementToBeClickable(selectItem);
         await selectItem.click();
     }
 
     async addCheckbox(checkboxXpath) {
         let formComputeEngine = await browser.$(this.formComputeEngineXpath);
         let checkbox = await formComputeEngine.$(checkboxXpath);
-
-        await browser.waitUntil(elementToBeClickable(checkbox), {
-            timeout: 10000,
-            timeoutMsg: 'Failed, after waiting for the element to be clickable',
-        });
-
+        await this.waitUntilElementToBeClickable(checkbox);
         await checkbox.click();
     }
 
@@ -175,7 +154,7 @@ export class CalculatorHomePage extends GoogleCloudHomePage {
         let buttonAddToEstimate = await browser.$(
             this.buttonAddToEstimateXpath
         );
-        await browser.waitUntil(elementToBeClickable(buttonAddToEstimate));
+        await this.waitUntilElementToBeClickable(buttonAddToEstimate);
         await buttonAddToEstimate.click();
     }
 }

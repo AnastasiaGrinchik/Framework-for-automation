@@ -17,12 +17,7 @@ export class YopmailHomePage extends BasicPage {
 
     async openRandomEmail() {
         let buttonRandomEmail = await browser.$(this.buttonRandomEmailXpath);
-
-        await browser.waitUntil(elementToBeClickable(buttonRandomEmail), {
-            timeout: 10000,
-            timeoutMsg: 'Failed, after waiting for the element to be clickable',
-        });
-
+        await this.waitUntilElementToBeClickable(buttonRandomEmail);
         await buttonRandomEmail.click();
     }
 
@@ -33,23 +28,13 @@ export class YopmailHomePage extends BasicPage {
 
     async checkMail() {
         let buttonCheckEmail = await browser.$(this.buttonCheckEmailXpath);
-
-        await browser.waitUntil(elementToBeClickable(buttonCheckEmail), {
-            timeout: 10000,
-            timeoutMsg: 'Failed, after waiting for the element to be clickable',
-        });
-
+        await this.waitUntilElementToBeClickable(buttonCheckEmail);
         await buttonCheckEmail.click();
     }
 
     async updateMail() {
         let buttonUpdate = await browser.$(this.buttonUpdateXpath);
-
-        await browser.waitUntil(elementToBeClickable(buttonUpdate), {
-            timeout: 10000,
-            timeoutMsg: 'Failed, after waiting for the element to be clickable',
-        });
-
+        await this.waitUntilElementToBeClickable(buttonUpdate);
         await buttonUpdate.click();
     }
 

@@ -4,10 +4,17 @@ import {
     PastebinResults,
     PastebinHome,
 } from '../../../pageObject_model/index.js';
+import { PastebinHomePage } from '../../../pageObject_model/PastebinHomePage.js';
 
 // npx wdio run ./wdio.conf.js --spec PastebinResultPage.spec.js
 
 describe('New page contains', function () {
+    PastebinHome.dataTextareaForTaskTwo =
+        'git config --global user.name  "New Sheriff in Town"' +
+        '\n' +
+        'git reset $(git commit-tree HEAD^{tree} -m "Legacy code")' +
+        '\n' +
+        'git push origin master --force';
     before(async function () {
         await PastebinResults.openPage(PastebinHome.urlPastebinHome);
         await PastebinResults.addNewPaste(PastebinHome.dataTextareaForTaskTwo);
@@ -32,19 +39,21 @@ describe('New page contains', function () {
 
         await PastebinResults.sendPaste();
 
-        await PastebinResults.getTitleBrowsertab();
+        await PastebinResults.findOutTitleBrowsertab();
 
-        await PastebinResults.getSavedText(
+        await PastebinResults.pushSavedText(
             PastebinResults,
             'savedSyntax',
             PastebinResults.savedSyntaxXpath
         );
 
-        await PastebinResults.getSavedText(
+        await PastebinResults.pushSavedText(
             PastebinResults,
             'savedTextArea',
             PastebinResults.savedTextAreaXpath
         );
+
+        await console.log(PastebinResults.savedTextArea);
 
         await PastebinResults.transformText(
             PastebinResults,
@@ -55,7 +64,7 @@ describe('New page contains', function () {
         await PastebinResults.transformText(
             PastebinHome,
             'dataTextareaForTaskTwo',
-            PastebinResults.dataTextareaForTaskTwo
+            PastebinHome.dataTextareaForTaskTwo
         );
     });
 

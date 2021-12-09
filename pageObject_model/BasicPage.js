@@ -1,11 +1,13 @@
+import { elementToBeClickable } from 'wdio-wait-for';
+
 export class BasicPage {
     constructor() {}
 
     async openPage(url) {
         await browser.setTimeout({
-            pageLoad: 8000,
-            implicit: 8000,
-            script: 8000,
+            pageLoad: 15000,
+            implicit: 15000,
+            script: 15000,
         });
         await browser.url(url);
         await browser.maximizeWindow();
@@ -27,6 +29,13 @@ export class BasicPage {
 
     async exitFrame() {
         await browser.switchToParentFrame();
+    }
+
+    async waitUntilElementToBeClickable(el) {
+        await browser.waitUntil(elementToBeClickable(el), {
+            timeout: 20000,
+            timeoutMsg: 'Failed, after waiting for the element to be clickable',
+        });
     }
 }
 

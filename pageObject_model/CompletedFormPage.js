@@ -4,7 +4,7 @@ import { CalculatorHomePage } from './CalculatorHomePage.js';
 export class CompletedFormPage extends CalculatorHomePage {
     constructor() {
         super();
-        this.CompletedFormXpath = '//*[@id="resultBlock"]';
+        this.completedFormXpath = '//*[@id="resultBlock"]';
         this.VMClassXpath =
             '//*[@id="compute"]//div[contains(text(), "VM class")]';
         this.instanceTypeXpath =
@@ -24,7 +24,7 @@ export class CompletedFormPage extends CalculatorHomePage {
     }
 
     async getTextFromForm(object, key, fieldXpath) {
-        let completedForm = await browser.$(this.CompletedFormXpath);
+        let completedForm = await browser.$(this.completedFormXpath);
         let field = await completedForm.$(fieldXpath);
         field = await field.getText();
         object[key] = await field;
@@ -40,14 +40,9 @@ export class CompletedFormPage extends CalculatorHomePage {
     }
 
     async addEmail() {
-        let completedForm = await browser.$(this.CompletedFormXpath);
+        let completedForm = await browser.$(this.completedFormXpath);
         let buttonAddEmail = await completedForm.$(this.buttonAddEmailXpath);
-
-        await browser.waitUntil(elementToBeClickable(buttonAddEmail), {
-            timeout: 10000,
-            timeoutMsg: 'Failed, after waiting for the element to be clickable',
-        });
-
+        await this.waitUntilElementToBeClickable(buttonAddEmail);
         await buttonAddEmail.click();
     }
 
@@ -60,12 +55,7 @@ export class CompletedFormPage extends CalculatorHomePage {
     async sendEmail() {
         let form = await browser.$(this.formEmailXpath);
         let buttonSend = await form.$(this.buttonSendEmailXpath);
-
-        await browser.waitUntil(elementToBeClickable(buttonSend), {
-            timeout: 10000,
-            timeoutMsg: 'Failed, after waiting for the element to be clickable',
-        });
-
+        await this.waitUntilElementToBeClickable(buttonSend);
         await buttonSend.click();
     }
 }
