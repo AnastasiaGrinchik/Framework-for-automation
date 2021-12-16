@@ -20,5 +20,3 @@ export class PasteFactory {
         return new Paste(pasteParametrs);
     }
 }
-// let FirstPaste = PasteFactory.getFirstPaste();
-// console.log(FirstPaste);

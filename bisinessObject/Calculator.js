@@ -5,8 +5,8 @@ export class Calculator {
         this.machineClass = calculatorParametrs.machineClass;
         this.series = calculatorParametrs.series;
         this.machineType = calculatorParametrs.machineType;
-        this.gruType = calculatorParametrs.gruType;
-        this.numberOfGrus = calculatorParametrs.numberOfGrus;
+        this.gpuType = calculatorParametrs.gpuType;
+        this.numberOfGpus = calculatorParametrs.numberOfGpus;
         this.localSsd = calculatorParametrs.localSsd;
         this.datacenter = calculatorParametrs.datacenter;
         this.commitedUsage = calculatorParametrs.commitedUsage;

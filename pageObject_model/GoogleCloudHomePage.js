@@ -9,8 +9,10 @@ export class GoogleCloudHomePage extends BasicPage {
             '//input[@class="devsite-search-field devsite-search-query"]';
         this.linkCalculatorXpath =
             '//*[@data-ctorig="https://cloud.google.com/products/calculator"]/b';
-        this.linkCalculatorPage =
-            'https://cloud.google.com/products/calculator';
+        this.linkTwoForPricingXpath =
+            '//a[@href="https://cloud.google.com/identity-platform/pricing?hl=en"]';
+        this.linkTwoForCalculatorXpath =
+            '//a[@href="/products/calculator#tab=identity-platform"]';
     }
 
     async openCalculator() {
@@ -20,17 +22,9 @@ export class GoogleCloudHomePage extends BasicPage {
         await searchButton.setValue('Google Cloud Platform Pricing Calculator');
         await browser.keys('Enter');
 
-        try {
-            let linkCalculator = await browser.$(this.linkCalculatorXpath);
-            await this.waitUntilElementToBeClickable(linkCalculator);
-            await linkCalculator.click();
-        } catch (error) {
-            if (error) {
-                await this.openPage(this.linkCalculatorPage);
-            } else {
-                throw error;
-            }
-        }
+        let linkCalculator = await browser.$(this.linkCalculatorXpath);
+        await this.waitUntilElementToBeClickable(linkCalculator);
+        await linkCalculator.click();
     }
 }
 
