@@ -4,8 +4,8 @@ import { CalculatorHomePage } from './CalculatorHomePage.js';
 export class CompletedFormPage extends CalculatorHomePage {
     constructor() {
         super();
-        this.CompletedFormXpath = '//*[@id="resultBlock"]';
-        this.VMClassXpath =
+        this.completedFormXpath = '//*[@id="resultBlock"]';
+        this.vmClassXpath =
             '//*[@id="compute"]//div[contains(text(), "VM class")]';
         this.instanceTypeXpath =
             '//*[@id="compute"]//div[contains(text(), "Instance type")]';
@@ -24,14 +24,14 @@ export class CompletedFormPage extends CalculatorHomePage {
     }
 
     async getTextFromForm(object, key, fieldXpath) {
-        let completedForm = await browser.$(this.CompletedFormXpath);
+        let completedForm = await browser.$(this.completedFormXpath);
         let field = await completedForm.$(fieldXpath);
         field = await field.getText();
         object[key] = await field;
     }
 
     async getAllField(obj) {
-        await this.getTextFromForm(obj, 'VMClass', obj.VMClassXpath);
+        await this.getTextFromForm(obj, 'VMClass', obj.vmClassXpath);
         await this.getTextFromForm(obj, 'region', obj.regionXpath);
         await this.getTextFromForm(obj, 'localSSD', obj.localSSDXpath);
         await this.getTextFromForm(obj, 'term', obj.termXpath);
@@ -40,7 +40,7 @@ export class CompletedFormPage extends CalculatorHomePage {
     }
 
     async addEmail() {
-        let completedForm = await browser.$(this.CompletedFormXpath);
+        let completedForm = await browser.$(this.completedFormXpath);
         let buttonAddEmail = await completedForm.$(this.buttonAddEmailXpath);
 
         await browser.waitUntil(elementToBeClickable(buttonAddEmail), {
