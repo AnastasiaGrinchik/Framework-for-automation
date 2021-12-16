@@ -9,8 +9,6 @@ import {
 } from '../../../pageObject_model/index.js';
 import { CalculatorFactory } from '../../../bisinessObject/CalculatorFactory.js';
 
-// npx wdio run ./wdio.conf.js --spec YopmailHomePage.spec.js
-
 describe('Data previously entered in the field', function () {
     let CalculatorData = CalculatorFactory.getCalculatorForm();
     before(async function () {
