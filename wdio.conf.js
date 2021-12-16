@@ -240,16 +240,8 @@ exports.config = {
     /**
      * Function to be executed before a test (in Mocha/Jasmine) starts.
      */
-    beforeTest: function (test, context) {
-        browser.setTimeout({
-            pageLoad: 8000,
-            implicit: 8000,
-            script: 8000,
-        });
-        browser.maximizeWindow();
-        // browser.takeScreenshot();
-        // browser.saveScreenshot('./screenshots/1.png');
-    },
+    // beforeTest: function (test, context) {
+    // },
     /**
      * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
      * beforeEach in Mocha)

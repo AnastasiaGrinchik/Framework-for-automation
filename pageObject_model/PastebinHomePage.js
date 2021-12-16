@@ -50,7 +50,6 @@ export class PastebinHomePage extends BasicPage {
         async function setSearchWordAndSelectOption(locatorXpath, optionText) {
             let itemLocator = await locatorXpath.replace('RAW', optionText);
             let selectItem = await selectList.$(itemLocator);
-            // await this.waitUntilElementToBeClickable(selectItem);
             await selectItem.click();
         }
 
