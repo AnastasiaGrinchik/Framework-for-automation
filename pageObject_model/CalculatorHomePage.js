@@ -36,13 +36,13 @@ export class CalculatorHomePage extends GoogleCloudHomePage {
         this.machineTypeListXpath = '//*[@id="select_container_103"]';
         this.checkboxXpath =
             '//*[@aria-label="Add GPUs"]/div[@class="md-container md-ink-ripple"]';
-        this.numberGrusSelectXpath =
+        this.numberGpusSelectXpath =
             '//*[@placeholder="Number of GPUs"]/*[@class="md-select-value"]//div';
-        this.numberGrusListXpath = '//*[@id="select_container_454"]';
-        this.numberGrusItemXpath =
+        this.numberGpusListXpath = '//*[@id="select_container_454"]';
+        this.numberGpusItemXpath =
             '//*[@id="select_option_462"]/div[@class="md-text ng-binding"]';
-        this.GruTypeSelectXpath = '//*[@aria-label="GPU type"]';
-        this.GruTypeListXpath = '//*[@value="NVIDIA_TESLA_K80"]/ancestor::div';
+        this.gpuTypeSelectXpath = '//*[@aria-label="GPU type"]';
+        this.gpuTypeListXpath = '//*[@value="NVIDIA_TESLA_K80"]/ancestor::div';
         this.localSsdSelectXpath =
             '//*[@placeholder="Local SSD"]/*[@class="md-select-value"]//div';
         this.localSsdListXpath = '//*[@id="select_container_414"]';
@@ -132,17 +132,17 @@ export class CalculatorHomePage extends GoogleCloudHomePage {
         await this.addCheckbox(this.checkboxXpath);
 
         await this.fillSelect(
-            this.GruTypeSelectXpath,
-            this.GruTypeListXpath,
+            this.gpuTypeSelectXpath,
+            this.gpuTypeListXpath,
             this.itemXpathXXX,
-            obj.gruType
+            obj.gpuType
         );
 
         await this.fillSelect(
-            this.numberGrusSelectXpath,
-            this.numberGrusListXpath,
+            this.numberGpusSelectXpath,
+            this.numberGpusListXpath,
             this.numberGrusLocatorItem,
-            obj.numberOfGrus
+            obj.numberOfGpus
         );
 
         await this.fillSelect(

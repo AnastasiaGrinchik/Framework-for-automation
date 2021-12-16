@@ -5,7 +5,7 @@ export class CompletedFormPage extends CalculatorHomePage {
     constructor() {
         super();
         this.completedFormXpath = '//*[@id="resultBlock"]';
-        this.VMClassXpath =
+        this.vmClassXpath =
             '//*[@id="compute"]//div[contains(text(), "VM class")]';
         this.instanceTypeXpath =
             '//*[@id="compute"]//div[contains(text(), "Instance type")]';
@@ -31,7 +31,7 @@ export class CompletedFormPage extends CalculatorHomePage {
     }
 
     async getAllField(obj) {
-        await this.getTextFromForm(obj, 'VMClass', obj.VMClassXpath);
+        await this.getTextFromForm(obj, 'VMClass', obj.vmClassXpath);
         await this.getTextFromForm(obj, 'region', obj.regionXpath);
         await this.getTextFromForm(obj, 'localSSD', obj.localSSDXpath);
         await this.getTextFromForm(obj, 'term', obj.termXpath);

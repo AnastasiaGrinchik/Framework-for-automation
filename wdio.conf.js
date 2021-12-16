@@ -2,17 +2,7 @@ let options = require('./yargs.js');
 
 exports.config = {
     automationProtocol: 'webdriver',
-    services: [
-        'selenium-standalone',
-        // [
-        //     'chromedriver',
-        //     {
-        //         logFileName: 'wdio-chromedriver.log', // default
-        //         outputDir: 'driver-logs', // overwrites the config.outputDir
-        //         args: ['--silent'],
-        //     },
-        // ],
-    ],
+    services: ['selenium-standalone'],
     plugins: {
         'wdio-screenshot': {},
     },
@@ -278,12 +268,15 @@ exports.config = {
         { error, result, duration, passed, retries }
     ) {
         function getTitleForScreenshot() {
-            let year = new Date().getFullYear();
-            let mounth = new Date().getMonth();
-            let day = new Date().getDate();
-            let hour = new Date().getHours();
-            let minutes = new Date().getMinutes();
-            return `${year}_${mounth}_${day}-${hour}_${minutes}`;
+            let date = new Date();
+            let year = date.getFullYear();
+            let month = date.getMonth() + 1;
+            let day = date.getDate();
+            let hour = date.getHours();
+            let minutes = date.getMinutes();
+            let seconds = date.getSeconds();
+
+            return `${year}_${month}_${day}-${hour}_${minutes}_${seconds}`;
         }
         if (error) {
             browser.takeScreenshot();
