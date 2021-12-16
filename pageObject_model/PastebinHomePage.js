@@ -28,11 +28,25 @@ export class PastebinHomePage extends BasicPage {
 
     async fillSelect(selectXpath, selectListXpath, locatorXpath, optionText) {
         let form = await browser.$(this.formXpath);
-
         let select = await form.$(selectXpath);
 
         try {
             await select.click();
+            let selectList = await browser.$(selectListXpath);
+
+            async function setSearchWordAndSelectOption(
+                locatorXpath,
+                optionText
+            ) {
+                let itemLocator = await locatorXpath.replace('RAW', optionText);
+                let selectItem = await selectList.$(itemLocator);
+                await selectItem.click();
+            }
+
+            async function selectOption() {
+                await setSearchWordAndSelectOption(locatorXpath, optionText);
+            }
+            selectOption();
         } catch (error) {
             if (error.message.includes('element click intercepted')) {
                 let buttonCloseBanner = await browser.$(
@@ -40,23 +54,33 @@ export class PastebinHomePage extends BasicPage {
                 );
                 await buttonCloseBanner.click();
                 await select.click();
+
+                let selectList = await browser.$(selectListXpath);
+
+                async function setSearchWordAndSelectOption(
+                    locatorXpath,
+                    optionText
+                ) {
+                    let itemLocator = await locatorXpath.replace(
+                        'RAW',
+                        optionText
+                    );
+                    let selectItem = await selectList.$(itemLocator);
+                    await selectItem.click();
+                }
+
+                async function selectOption() {
+                    await setSearchWordAndSelectOption(
+                        locatorXpath,
+                        optionText
+                    );
+                }
+
+                selectOption();
             } else {
                 throw error;
             }
         }
-
-        let selectList = await browser.$(selectListXpath);
-
-        async function setSearchWordAndSelectOption(locatorXpath, optionText) {
-            let itemLocator = await locatorXpath.replace('RAW', optionText);
-            let selectItem = await selectList.$(itemLocator);
-            await selectItem.click();
-        }
-
-        async function selectOption() {
-            await setSearchWordAndSelectOption(locatorXpath, optionText);
-        }
-        selectOption();
     }
 
     async addPasteName(titleContent) {
