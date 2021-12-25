@@ -8,8 +8,6 @@ import {
 } from '../../../pageObject_model/index.js';
 import { PastebinHomePage } from '../../../pageObject_model/PastebinHomePage.js';
 
-// npx wdio run ./wdio.conf.js --spec PastebinResultPage.spec.js
-
 describe('New page contains', function () {
     let SecondPaste = PasteFactory.getSecondPaste();
 
